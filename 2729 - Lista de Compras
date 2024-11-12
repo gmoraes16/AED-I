@@ -57,7 +57,7 @@ void ordenarLista(celula *lst) {
     for (i = lst; i != NULL; i = i->seg) {
         for (j = i->seg; j != NULL; j = j->seg) {
             if (strcmp(i->conteudo, j->conteudo) > 0) {
-                // Troca os conteúdos
+                
                 strcpy(temp, i->conteudo);
                 strcpy(i->conteudo, j->conteudo);
                 strcpy(j->conteudo, temp);
@@ -73,7 +73,7 @@ void removerDuplicatas(celula *lst) {
         prev = p;
         for (q = p->seg; q != NULL;) {
             if (strcmp(p->conteudo, q->conteudo) == 0) {
-                // Remover o nó q
+                
                 prev->seg = q->seg;
                 free(q);
                 q = prev->seg;
