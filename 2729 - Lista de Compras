@@ -3,106 +3,102 @@
 #include <stdlib.h>
 
 typedef struct celula {
-    char conteudo[20];
-    struct celula *seg;
-} celula;
+  char conteudo[21];
+  struct celula * seg;
+}
+celula;
 
-void imprimeLista(celula *lst) {
-    celula *p;
-    for (p = lst; p != NULL; p = p->seg) {
-        printf("%s", p->conteudo);
-        if (p->seg != NULL) {
-            printf(" ");
-        }
-    }
-    printf("\n");
+celula * criarCelula(const char * conteudo) {
+  celula * nova = (celula * ) malloc(sizeof(celula));
+  if (nova != NULL) {
+    strcpy(nova -> conteudo, conteudo);
+    nova -> seg = NULL;
+  }
+  return nova;
 }
 
-int verificar(celula *lst, char *item) {
-    celula *p;
-    for (p = lst; p != NULL; p = p->seg) {
-        if (strcmp(p->conteudo, item) == 0) {
-            return 1;
-        }
-    }
-    return 0;
+void inserirOrdem(celula ** lst,
+  const char * conteudo) {
+  celula * nova = criarCelula(conteudo);
+  if (!nova) return;
+
+  if ( * lst == NULL || strcmp(( * lst) -> conteudo, conteudo) > 0) {
+    nova -> seg = * lst;
+    * lst = nova;
+    return;
+  }
+
+  celula * q = * lst;
+  while (q -> seg != NULL && strcmp(q -> seg -> conteudo, conteudo) < 0) {
+    q = q -> seg;
+  }
+
+  if (q -> seg == NULL || strcmp(q -> seg -> conteudo, conteudo) != 0) {
+    nova -> seg = q -> seg;
+    q -> seg = nova;
+  } else {
+    free(nova);
+  }
 }
 
+void removerDuplicatas(celula * lst) {
+  celula * q = lst;
 
-void insereNoFinal(celula **lst, char *item) {
-
-    celula *novo = (celula *)malloc(sizeof(celula));
-    strcpy(novo->conteudo, item);
-    novo->seg = NULL;
-
-
-    if (*lst == NULL) {
-        *lst = novo;
+  while (q != NULL && q -> seg != NULL) {
+    if (strcmp(q -> conteudo, q -> seg -> conteudo) == 0) {
+      celula * p = q -> seg;
+      q -> seg = q -> seg -> seg;
+      free(p);
     } else {
-
-        celula *p = *lst;
-        while (p->seg != NULL) {
-            p = p->seg;
-        }
-        p->seg = novo;
+      q = q -> seg;
     }
+  }
 }
 
-void ordenarLista(celula *lst) {
-    if (lst == NULL) return;
-
-    celula *i, *j;
-    char temp[20];
-
-    for (i = lst; i != NULL; i = i->seg) {
-        for (j = i->seg; j != NULL; j = j->seg) {
-            if (strcmp(i->conteudo, j->conteudo) > 0) {
-                
-                strcpy(temp, i->conteudo);
-                strcpy(i->conteudo, j->conteudo);
-                strcpy(j->conteudo, temp);
-            }
-        }
-    }
+void imprimeLista(celula * lst) {
+  celula * q = lst;
+  int primeiro = 1;
+  while (q != NULL) {
+    if (!primeiro)
+      printf(" ");
+    printf("%s", q -> conteudo);
+    primeiro = 0;
+    q = q -> seg;
+  }
+  printf("\n");
 }
 
-void removerDuplicatas(celula *lst) {
-    celula *p, *q, *prev;
-
-    for (p = lst; p != NULL && p->seg != NULL; p = p->seg) {
-        prev = p;
-        for (q = p->seg; q != NULL;) {
-            if (strcmp(p->conteudo, q->conteudo) == 0) {
-                
-                prev->seg = q->seg;
-                free(q);
-                q = prev->seg;
-            } else {
-                prev = q;
-                q = q->seg;
-            }
-        }
-    }
+void liberarLista(celula * lst) {
+  celula * q = lst;
+  while (q != NULL) {
+    celula * p = q;
+    q = q -> seg;
+    free(p);
+  }
 }
 
 int main() {
-    int n, i;
-    scanf("%d\n", &n);
-    char linha[1000];
-    for (i = 0; i < n; i++) {
-        celula *listaCompras = NULL;
-        fgets(linha, 1001, stdin);
-        linha[strcspn(linha, "\n")] = 0;
+    unsigned short casos;
+    char itens[20010], * cadaItem;
+    celula * listaCompras = NULL;
 
-        char *token = strtok(linha, " ");
-        while (token != NULL) {
-            insereNoFinal(&listaCompras, token);
-            token = strtok(NULL, " ");
-        }
+    scanf("%hu", & casos);
 
-        removerDuplicatas(listaCompras);
-        ordenarLista(listaCompras);
-        imprimeLista(listaCompras);
+    while (casos--) {
+
+      scanf(" %[^\n]", itens);
+
+      listaCompras = NULL;
+      cadaItem = strtok(itens, " ");
+
+      while (cadaItem != NULL) {
+        inserirOrdem( & listaCompras, cadaItem);
+        cadaItem = strtok(NULL, " ");
+      }
+
+      removerDuplicatas(listaCompras);
+      imprimeLista(listaCompras);
+      liberarLista(listaCompras);
     }
 
     return 0;
