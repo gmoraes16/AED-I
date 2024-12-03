@@ -12,9 +12,16 @@ void Inserção(int n, int v[]) {
 }
 
 int main() {
-    int v[] = {n}; // Substitui-se n por quaisquer valores, lembrando que o desempenho do algoritmo é proporcional a n²
-    int t = sizeof(v) / sizeof(v[0]);
-    
+    int n = 50000;  // Número de elementos
+    int v[n];
+
+    // Gerador de números aleatórios
+    srand(time(NULL));
+
+    for (int i = 0; i < n; i++) {
+        v[i] = rand();
+    }
+
     Inserção(t, v);
 
     for (int i = 0; i < t; i++) {
