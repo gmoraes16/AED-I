@@ -22,9 +22,9 @@ int main() {
         v[i] = rand();
     }
 
-    Inserção(t, v);
+    Inserção(n, v);
 
-    for (int i = 0; i < t; i++) {
+    for (int i = 0; i < n; i++) {
         printf("%d ", v[i]);
     }
     printf("\n");
