@@ -15,7 +15,7 @@ int main() {
     int n = 50000;  // Número de elementos
     int v[n];
 
-    // Gerador de números aleatórios
+    // Gera numeros aleatorios
     srand(time(NULL));
 
     for (int i = 0; i < n; i++) {
