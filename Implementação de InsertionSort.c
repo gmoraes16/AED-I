@@ -15,7 +15,7 @@ int main() {
     int v[] = {n}; // Substitui-se n por quaisquer valores, lembrando que o desempenho do algoritmo é proporcional a n²
     int t = sizeof(v) / sizeof(v[0]);
     
-    Inserção(n, v);
+    Inserção(t, v);
 
     for (int i = 0; i < t; i++) {
         printf("%d ", v[i]);
