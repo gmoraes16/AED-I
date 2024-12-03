@@ -12,7 +12,7 @@ void Inserção(int n, int v[]) {
 }
 
 int main() {
-    int v[] = {n}; // Substitui-se n por quaisquer valores
+    int v[] = {n}; // Substitui-se n por quaisquer valores, lembrando que o desempenho do algoritmo é proporcional a n²
     int t = sizeof(v) / sizeof(v[0]);
     
     Inserção(n, v);
