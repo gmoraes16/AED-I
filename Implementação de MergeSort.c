@@ -25,9 +25,14 @@ void Mergesort(int p, int r, int v[]) {
 }
 
 int main() {
-    int v[] = {n}; // Substitui-se n por quaisquer valores, lembrando que o desempenho do algoritmo é proporcional a n log₂ n
-    int t = sizeof(v) / sizeof(v[0]);
+    int n = 50000;  // Número de elementos
+    int v[n];
+
+    // Gerador de números aleatórios
+    srand(time(NULL));
+
     Mergesort(0, t, v);
+    
     for (int i = 0; i < t; i++) {
         printf("%d ", v[i]);
     }
