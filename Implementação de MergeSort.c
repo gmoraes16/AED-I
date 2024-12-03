@@ -25,7 +25,7 @@ void Mergesort(int p, int r, int v[]) {
 }
 
 int main() {
-    int v[] = {n}; // Substitui-se n por quaisquer valores, lembrando que o desempenho do algoritmo é proporcional a n²
+    int v[] = {n}; // Substitui-se n por quaisquer valores, lembrando que o desempenho do algoritmo é proporcional a n log₂ n
     int t = sizeof(v) / sizeof(v[0]);
     Mergesort(0, t, v);
     for (int i = 0; i < t; i++) {
