@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void Inserção(int n, int v[]) {
     int i, j, x;
