@@ -14,7 +14,7 @@ void Inserção(int n, int v[]) {
 }
 
 int main() {
-    int n = 50000;  // Numero de elementos
+    int n = 20000;  // Numero de elementos
     int v[n];
 
     // Gera numeros aleatorios
