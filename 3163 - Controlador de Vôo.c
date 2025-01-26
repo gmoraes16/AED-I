@@ -29,7 +29,7 @@ void inserirAviao(celula** fila, char identificador[]) {
 }
 
 void imprimirFila() {
-    Celula *tempOeste, *tempNorte, *tempSul, *tempLeste;
+    celula *tempOeste, *tempNorte, *tempSul, *tempLeste;
     int first = 1;
 
     while (filaOeste != NULL || filaNorte != NULL || filaSul != NULL || filaLeste != NULL) {
