@@ -39,10 +39,6 @@ void Empilha(int y, celula **p) {
 }
 
 int Desempilha(celula **p) {
-    if (*p == NULL) {
-        printf("Pilha vazia!\n");
-        exit(1);
-    }
     int x = (*p)->valor;
     celula *q = *p;
     *p = (*p)->seg;
@@ -63,10 +59,6 @@ void Insere(int y, celula **es, celula **et) {
 }
 
 int Remove(celula **es, celula **et) {
-    if (*es == NULL) {
-        printf("Fila vazia!\n");
-        exit(1);
-    }
     int x = (*es)->valor;
     celula *p = *es;
     *es = p->seg;
