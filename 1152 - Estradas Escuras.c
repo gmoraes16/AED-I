@@ -11,7 +11,7 @@ int compararAresta(const void *a, const void *b) {
     return arestaA->peso - arestaB->peso;
 }
 
-int busca(int pai[], int i) {
+int encontra(int pai[], int i) {
     if (pai[i] != i) {
         pai[i] = encontra(pai, pai[i]);
     }
